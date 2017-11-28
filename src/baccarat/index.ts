@@ -1,4 +1,4 @@
-import { Rank, Card, cardArray2Str, str2CardArray, } from "./card";
+import { Rank, Card, cardArray2Str, str2CardArray, card2Str } from "./card";
 
 const valueMap = new Map<Rank, number>([
     ["A", 1],
@@ -22,7 +22,7 @@ export enum Position {
 
 export function cardValue(card: Card): number {
     const v = valueMap.get(card.rank);
-    if (v === undefined) throw new Error(`no value found for card: ${card.suit}${card.rank}`);
+    if (v === undefined) throw new Error(`no value found for card: ${card2Str(card)}`);
     return v;
 }
 
@@ -53,6 +53,7 @@ export function restoreCards(playerCards: Array<Card>, bankerCards: Array<Card>)
     }
     return undefined
 }
+
 export function checkCards(playerCards: Array<Card>, bankerCards: Array<Card>): Baccarat | undefined {
     const cards = restoreCards(playerCards, bankerCards);
     if (cards !== undefined) {
@@ -63,9 +64,7 @@ export function checkCards(playerCards: Array<Card>, bankerCards: Array<Card>): 
                 return undefined;
             }
         }
-        if (ba.isComplete) {
-            return ba;
-        }
+        return ba;
     }
     return undefined;
 }
@@ -84,7 +83,7 @@ export class Baccarat {
     private playerCards: Array<Card>;
     private bankerCards: Array<Card>;
     private complete: boolean;
-    
+
     private static readonly cardsSep = '#';
 
     constructor() {

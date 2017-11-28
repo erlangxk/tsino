@@ -14,7 +14,7 @@ export function mkCard(suit: Suit, rank: Rank): Card {
 }
 
 export function equals(c1: Card | undefined, c2: Card | undefined): boolean {
-    return c1 !== undefined && c2 != undefined && c1.suit === c2.suit && c1.rank === c2.rank;
+    return c1 !== undefined && c2 !== undefined && c1.suit === c2.suit && c1.rank === c2.rank;
 }
 
 export function card2Str(card: Card) {
