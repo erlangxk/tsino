@@ -13,8 +13,12 @@ export function mkCard(suit: Suit, rank: Rank): Card {
     return ({ suit, rank });
 }
 
-export function equals(c1: Card | undefined, c2: Card | undefined): boolean {
+export function isEqual(c1: Card | undefined, c2: Card | undefined): boolean {
     return c1 !== undefined && c2 !== undefined && c1.suit === c2.suit && c1.rank === c2.rank;
+}
+
+export function isPair(c1: Card, c2: Card): boolean {
+    return c1.rank === c2.rank;
 }
 
 export function card2Str(card: Card) {

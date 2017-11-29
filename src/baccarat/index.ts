@@ -92,8 +92,24 @@ export class Baccarat {
         this.complete = false;
     }
 
+    first2PlayerCards() {
+        return this.playerCards.slice(-2);
+    }
+
+    first2BankerCards() {
+        return this.bankerCards.slice(-2);
+    }
+
     isComplete() {
         return this.complete;
+    }
+
+    totalBankerCards(){
+        return this.bankerCards.length;
+    }
+
+    totalCards() {
+        return this.playerCards.length + this.bankerCards.length;
     }
 
     toString() {
@@ -179,16 +195,19 @@ export class Baccarat {
                 }
                 return Position.Player
             }
-            if (bt >= 0 && bt <= 2) {
+            if (bt >= 0 && bt < 6) {
                 this.addBankerCard(card);
                 this.complete = true;
                 return Position.Banker
             }
         }
         if (pl === 3 && bl === 2) {
-            this.addBankerCard(card);
-            this.complete = true;
-            return Position.Banker
+            const pt = this.playerTotal();
+            if (pt >= 0 && pt < 6) {
+                this.addBankerCard(card);
+                this.complete = true;
+                return Position.Banker
+            }
         }
         return undefined;
     }

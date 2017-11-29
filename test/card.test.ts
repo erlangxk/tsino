@@ -16,8 +16,8 @@ describe("baccarat dealing rules", () => {
 
     test('str2Card', () => {
         const c = card.str2Card('DT');
-        expect(card.equals(c, DT)).toBe(true);
-        expect(card.equals(c, card.mkCard('S', 'T'))).toBe(false);
+        expect(card.isEqual(c, DT)).toBe(true);
+        expect(card.isEqual(c, card.mkCard('S', 'T'))).toBe(false);
     });
 
     test('string2StrArray', () => {
